@@ -1,0 +1,36 @@
+# Linux environment for all workflows in README.md.
+# Prerequisites from the OS: bash, awk, gzip, wget.
+# Install missing OS tools separately; see README.md.
+name: chrom-oligo-classification
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  # Python runtime
+  - python>=3.9
+  # 01_kmer_classification: sequence extraction and k-mer counting
+  - htslib  # Provides bgzip (also tabix and htsfile).
+  - samtools
+  - jellyfish=2.2.10
+  - parallel  # GNU parallel: independent k=2..9 jobs with --cores 2..8
+  # 01_kmer_classification: statistical analyses and output tables
+  - r-base=4.3.0
+  - r-ape
+  - r-phangorn
+  - r-dplyr
+  - r-tibble
+  - r-ca
+  - r-readr
+  - r-stringr
+  # 02_cross_species_assignment: scoring and assignment tables
+  - pandas
+  - numpy
+  # Common macrosyntR dependencies (remaining required dependencies installed from CRAN)
+  - r-ggplot2
+  - r-igraph
+  - r-tidyr
+  - r-reshape2
+  - r-remotes
+  # macrosyntR 0.2.19 is installed separately via remotes::install_version.
+  # After conda creation/update: Rscript install_macrosyntR.R
+  # See README: the legacy load_orthologs API uses sp1_bed and sp2_bed.
